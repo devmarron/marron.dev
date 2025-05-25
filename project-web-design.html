@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Tracker - marron.dev</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    :root {
+      --primary: #7B4A2A;
+      --primary-light: #9B6C4E;
+      --primary-dark: #5C3114;
+      --accent: #FF6B35;
+      --accent-light: #FF8A5B;
+      --accent-glow: rgba(255, 107, 53, 0.1);
+      --white: #FFFFFF;
+      --off-white: #FAFAFA;
+      --light-gray: #F8F8F8;
+      --medium-gray: #E8E8E8;
+      --text-dark: #1A1A1A;
+      --text-medium: #4A4A4A;
+      --text-light: #7A7A7A;
+      --border-light: rgba(0, 0, 0, 0.06);
+      --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.04);
+      --shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.08);
+      --shadow-large: 0 20px 80px rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      line-height: 1.8;
+      overflow-x: hidden;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+              radial-gradient(circle at 20% 50%, var(--accent-glow) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, var(--accent-glow) 0%, transparent 50%),
+              radial-gradient(circle at 40% 20%, var(--accent-glow) 0%, transparent 50%);
+      opacity: 0.4;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Cursor */
+    .cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--text-dark);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 0.1s ease;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-follower {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(26, 26, 26, 0.15);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor.hover {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      mix-blend-mode: normal;
+    }
+
+    .cursor-follower.hover {
+      width: 40px;
+      height: 40px;
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 2.5rem 4rem;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .nav-scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem 4rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      transition: all 0.3s ease;
+    }
+
+    .logo::after {
+      content: '.dev';
+      color: var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      color: var(--primary);
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 3.5rem;
+    }
+
+    .nav-menu a {
+      color: var(--text-medium);
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 0.9rem;
+      position: relative;
+      transition: color 0.3s ease;
+      padding: 0.5rem 0;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .nav-menu a:hover {
+      color: var(--text-dark);
+    }
+
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-medium);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .nav-back:hover {
+      color: var(--text-dark);
+      gap: 0.75rem;
+    }
+
+    /* Project Hero */
+    .project-hero {
+      padding: 12rem 4rem 8rem;
+      background: var(--white);
+      position: relative;
+    }
+
+    .project-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+              radial-gradient(ellipse at top right, var(--accent-glow) 0%, transparent 40%),
+              radial-gradient(ellipse at bottom left, rgba(123, 74, 42, 0.05) 0%, transparent 40%);
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .project-hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-category {
+      color: var(--accent);
+      font-size: 0.875rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+    }
+
+    .project-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-medium);
+      max-width: 700px;
+      line-height: 1.6;
+      margin-bottom: 4rem;
+    }
+
+    .project-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      margin-bottom: 6rem;
+    }
+
+    .meta-item {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.5rem;
+    }
+
+    .meta-label {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+
+    .meta-value {
+      font-size: 1rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    /* Hero Image */
+    .project-hero-image {
+      width: 100%;
+      height: 600px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-large);
+      position: relative;
+    }
+
+    .project-hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Content Sections */
+    .project-content {
+      padding: 8rem 0;
+    }
+
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .content-section {
+      margin-bottom: 8rem;
+    }
+
+    .content-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--text-dark);
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-text {
+      font-size: 1.125rem;
+      color: var(--text-medium);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .section-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+
+    .challenge-list {
+      list-style: none;
+    }
+
+    .challenge-list li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-medium);
+      line-height: 1.7;
+    }
+
+    .challenge-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* Process Steps */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .process-step {
+      text-align: center;
+      padding: 2rem;
+      background: var(--off-white);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .process-step:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin: 0 auto 1.5rem;
+    }
+
+    .step-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .step-description {
+      color: var(--text-medium);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    /* Image Gallery */
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+
+    .gallery-image {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+    }
+
+    .gallery-image:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .gallery-image img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    /* Results Section */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      margin: 4rem 0;
+    }
+
+    .result-item {
+      text-align: center;
+      padding: 2rem;
+      background: var(--light-gray);
+      border-radius: 8px;
+    }
+
+    .result-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .result-label {
+      font-size: 0.875rem;
+      color: var(--text-medium);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Testimonial */
+    .testimonial {
+      background: var(--off-white);
+      padding: 4rem;
+      border-radius: 12px;
+      text-align: center;
+      margin: 6rem 0;
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem;
+      color: var(--accent);
+      opacity: 0.2;
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      line-height: 1;
+    }
+
+    .testimonial-text {
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-role {
+      font-size: 0.9rem;
+      color: var(--text-medium);
+    }
+
+    /* Project Navigation */
+    .project-nav {
+      padding: 6rem 0;
+      background: var(--off-white);
+      border-top: 1px solid var(--border-light);
+    }
+
+    .project-nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-project {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+      max-width: 400px;
+    }
+
+    .nav-project:hover {
+      color: var(--accent);
+    }
+
+    .nav-project.prev {
+      text-align: left;
+    }
+
+    .nav-project.next {
+      text-align: right;
+      flex-direction: row-reverse;
+    }
+
+    .nav-project-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .nav-project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nav-project-info h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-project-info p {
+      font-size: 0.875rem;
+      color: var(--text-medium);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem;
+      border-top: 1px solid var(--border-light);
+      background: var(--white);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .footer-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-logo::after {
+      content: '.dev';
+      color: var(--accent);
+    }
+
+    .footer-text {
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-medium);
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .challenge-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .project-meta {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1.5rem 2rem;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .project-hero {
+        padding: 8rem 2rem 4rem;
+      }
+
+      .content-container {
+        padding: 0 2rem;
+      }
+
+      .project-meta {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-nav-container {
+        flex-direction: column;
+        gap: 3rem;
+        padding: 0 2rem;
+      }
+
+      .nav-project {
+        max-width: 100%;
+      }
+
+      .testimonial {
+        padding: 2rem;
+        margin: 3rem 0;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .footer-left {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .cursor,
+      .cursor-follower {
+        display: none;
+      }
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<!-- Navigation -->
+<nav id="nav">
+  <div class="nav-container">
+    <a href="index.html" class="logo">marron</a>
+    <ul class="nav-menu">
+      <li><a href="index.html#portfolio">Work</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="index.html#portfolio" class="nav-back">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back to Work</span>
+    </a>
+  </div>
+</nav>
+
+<!-- Project Hero -->
+<section class="project-hero">
+  <div class="project-hero-container">
+    <div class="project-category">Mobile App</div>
+    <h1 class="project-title">Finance Tracker</h1>
+    <p class="project-subtitle">
+      A comprehensive personal finance management app that simplifies budgeting, expense tracking, and financial planning for modern users.
+    </p>
+
+    <div class="project-meta">
+      <div class="meta-item">
+        <div class="meta-label">Client</div>
+        <div class="meta-value">FinTech Startup</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Duration</div>
+        <div class="meta-value">4 Months</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Team Size</div>
+        <div class="meta-value">6 Members</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Platform</div>
+        <div class="meta-value">iOS & Android</div>
+      </div>
+    </div>
+
+    <div class="project-hero-image">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="Finance Tracker App">
+    </div>
+  </div>
+</section>
+
+<!-- Project Content -->
+<section class="project-content">
+  <div class="content-container">
+
+    <!-- Challenge Section -->
+    <div class="content-section fade-in">
+      <h2 class="section-title">The Challenge</h2>
+      <p class="section-text">
+        In today's fast-paced world, managing personal finances has become increasingly complex. Traditional banking apps often lack intuitive design and comprehensive features that users need to effectively track their spending, set budgets, and achieve financial goals.
+      </p>
+
+      <div class="challenge-grid">
+        <div>
+          <p class="section-text">
+            Our client, a emerging FinTech startup, approached us with a vision to create a mobile application that would revolutionize how people interact with their personal finances.
+          </p>
+          <ul class="challenge-list">
+            <li>Complex financial data visualization</li>
+            <li>User-friendly budget creation and management</li>
+            <li>Real-time expense categorization</li>
+            <li>Cross-platform consistency</li>
+            <li>Bank-level security implementation</li>
+          </ul>
+        </div>
+        <div>
+          <p class="section-text">
+            The main challenge was to create an interface that makes complex financial data accessible and actionable for users of all financial literacy levels, while maintaining the highest security standards.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process Section -->
+    <div class="content-section fade-in">
+      <h2 class="section-title">Our Process</h2>
+      <p class="section-text">
+        We followed a user-centered design approach, combining extensive research with iterative design and development cycles to ensure the final product exceeded user expectations.
+      </p>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Research & Discovery</h3>
+          <p class="step-description">
+            Conducted user interviews, competitive analysis, and market research to understand user pain points and opportunities.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Design & Prototyping</h3>
+          <p class="step-description">
+            Created wireframes, user flows, and high-fidelity prototypes to visualize the user experience and interface design.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Development</h3>
+          <p class="step-description">
+            Built the app using React Native for cross-platform compatibility, with robust backend integration and security features.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Testing & Launch</h3>
+          <p class="step-description">
+            Conducted extensive testing, gathered user feedback, and successfully launched on both iOS and Android platforms.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Solution Section -->
+    <div class="content-section fade-in">
+      <h2 class="section-title">The Solution</h2>
+      <p class="section-text">
+        We developed a comprehensive finance tracking application that combines intuitive design with powerful functionality. The app features a clean, modern interface that makes financial management accessible to everyone.
+      </p>
+
+      <div class="image-gallery">
+        <div class="gallery-image">
+          <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80" alt="Dashboard Overview">
+        </div>
+        <div class="gallery-image">
+          <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&q=80" alt="Expense Tracking">
+        </div>
+        <div class="gallery-image">
+          <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=80" alt="Budget Management">
+        </div>
+      </div>
+
+      <p class="section-text">
+        Key features include real-time expense tracking, intelligent categorization, customizable budgets, financial goal setting, and comprehensive analytics. The app also integrates with major banking institutions for automatic transaction importing.
+      </p>
+    </div>
+
+    <!-- Results Section -->
+    <div class="content-section fade-in">
+      <h2 class="section-title">Results & Impact</h2>
+      <p class="section-text">
+        The Finance Tracker app launched successfully and quickly gained traction in the competitive fintech market. The intuitive design and comprehensive features resonated strongly with users.
+      </p>
+
+      <div class="results-grid">
+        <div class="result-item">
+          <div class="result-number">50K+</div>
+          <div class="result-label">Downloads</div>
+        </div>
+        <div class="result-item">
+          <div class="result-number">4.8</div>
+          <div class="result-label">App Store Rating</div>
+        </div>
+        <div class="result-item">
+          <div class="result-number">85%</div>
+          <div class="result-label">User Retention</div>
+        </div>
+        <div class="result-item">
+          <div class="result-number">92%</div>
+          <div class="result-label">User Satisfaction</div>
+        </div>
+      </div>
+
+      <p class="section-text">
+        The app's success led to additional funding rounds for our client and established them as a competitive player in the personal finance app market. Users particularly praised the app's ease of use and comprehensive feature set.
+      </p>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="testimonial fade-in">
+      <p class="testimonial-text">
+        Working with marron.dev was exceptional. They transformed our complex vision into a beautiful, user-friendly app that exceeded all our expectations. The team's expertise in both design and development was evident throughout the entire process.
+      </p>
+      <div class="testimonial-author">Sarah Chen</div>
+      <div class="testimonial-role">CEO, FinTech Startup</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Project Navigation -->
+<section class="project-nav">
+  <div class="project-nav-container">
+    <a href="project-annual-report.html" class="nav-project prev">
+      <div class="nav-project-image">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=200&q=80" alt="Previous Project">
+      </div>
+      <div class="nav-project-info">
+        <h4>Annual Report Design</h4>
+        <p>Previous Project</p>
+      </div>
+    </a>
+
+    <a href="project-saas-solution.html" class="nav-project next">
+      <div class="nav-project-image">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=200&q=80" alt="Next Project">
+      </div>
+      <div class="nav-project-info">
+        <h4>SaaS Solution</h4>
+        <p>Next Project</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-left">
+      <a href="index.html" class="footer-logo">marron</a>
+      <div class="footer-text">
+        © 2025 marron.dev — Digital Innovation Studio
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Initialize cursor
+  function initCursor() {
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    function animateFollower() {
+      followerX += (mouseX - followerX) * 0.1;
+      followerY += (mouseY - followerY) * 0.1;
+      cursorFollower.style.left = followerX + 'px';
+      cursorFollower.style.top = followerY + 'px';
+      requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+
+    const interactiveElements = document.querySelectorAll('a, button, .gallery-image, .process-step, .result-item');
+
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('hover');
+        cursorFollower.classList.add('hover');
+      });
+
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('hover');
+        cursorFollower.classList.remove('hover');
+      });
+    });
+  }
+
+  // Navigation scroll effect
+  function initNavigation() {
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 50) {
+        nav.classList.add('nav-scrolled');
+      } else {
+        nav.classList.remove('nav-scrolled');
+      }
+    });
+  }
+
+  // Scroll animations
+  function initScrollAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  // Counter animation for results
+  function animateCounters() {
+    const resultNumbers = document.querySelectorAll('.result-number');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const value = target.textContent;
+          const isPercentage = value.includes('%');
+          const isRating = value.includes('.');
+          const isLarge = value.includes('K');
+
+          let numericValue;
+          if (isLarge) {
+            numericValue = parseInt(value.replace('K+', '')) * 1000;
+          } else if (isRating) {
+            numericValue = parseFloat(value) * 10;
+          } else if (isPercentage) {
+            numericValue = parseInt(value.replace('%', ''));
+          } else {
+            numericValue = parseInt(value);
+          }
+
+          animateNumber(target, numericValue, value);
+          counterObserver.unobserve(target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    resultNumbers.forEach(num => {
+      counterObserver.observe(num);
+    });
+  }
+
+  function animateNumber(element, target, originalValue) {
+    let current = 0;
+    const increment = target / 60;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        element.textContent = originalValue;
+        clearInterval(timer);
+      } else {
+        if (originalValue.includes('K+')) {
+          element.textContent = Math.floor(current / 1000) + 'K+';
+        } else if (originalValue.includes('.')) {
+          element.textContent = (current / 10).toFixed(1);
+        } else if (originalValue.includes('%')) {
+          element.textContent = Math.floor(current) + '%';
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }
+    }, 16);
+  }
+
+  // Disable cursor on mobile
+  if (window.innerWidth <= 768) {
+    document.querySelector('.cursor').style.display = 'none';
+    document.querySelector('.cursor-follower').style.display = 'none';
+  }
+
+  // Initialize everything
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.innerWidth > 768) {
+      initCursor();
+    }
+    initNavigation();
+    initScrollAnimations();
+    animateCounters();
+  });
+</script>
+
+</body>
+</html>

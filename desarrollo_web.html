@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo Web | marron.dev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #7B4A2A;
+            --primary-light: #9B6C4E;
+            --primary-dark: #5C3114;
+            --accent: #FF6B35;
+            --dark: #121212;
+            --light: #FAFAFA;
+            --neutral-100: #F5F5F5;
+            --neutral-200: #E5E5E5;
+            --neutral-300: #D4D4D4;
+            --neutral-800: #262626;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --blur-amount: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Efecto de fondo futurista */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                    radial-gradient(circle at 50% 10%, rgba(123, 74, 42, 0.3) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 70%, rgba(255, 107, 53, 0.2) 0%, transparent 40%),
+                    radial-gradient(circle at 10% 60%, rgba(123, 74, 42, 0.2) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* Malla de puntos */
+        .grid-dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                    radial-gradient(var(--neutral-800) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        /* Elementos flotantes de decoración */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        .float-1 {
+            width: 350px;
+            height: 350px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+            animation: float 20s infinite alternate ease-in-out;
+            opacity: 0.2;
+        }
+
+        .float-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            bottom: 100px;
+            left: -150px;
+            animation: float 15s infinite alternate-reverse ease-in-out;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(10deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            background: rgba(18, 18, 18, 0.8);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--light);
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            left: -10px;
+            top: -10px;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.7;
+        }
+
+        .container {
+            width: 85%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-left: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--light);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--light);
+            border: none;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(92, 49, 20, 0.3);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Banner de la página */
+        .page-banner {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern-dot.png');
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .page-banner-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .page-banner .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-banner h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .page-banner p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--neutral-200);
+        }
+
+        /* Sección principal */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--neutral-300);
+        }
+
+        /* Descripción general */
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .overview-image {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .overview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overview-text {
+            max-width: 600px;
+        }
+
+        .overview-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .overview-text p {
+            margin-bottom: 1.5rem;
+            color: var(--neutral-300);
+        }
+
+        /* Tecnologías */
+        .tech-section {
+            background: rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .tech-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(123, 74, 42, 0.1), rgba(0, 0, 0, 0.2));
+            z-index: 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover .tech-icon {
+            transform: scale(1.1);
+        }
+
+        .tech-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .tech-item p {
+            color: var(--neutral-300);
+            font-size: 0.9rem;
+        }
+
+        /* Servicios específicos */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+
+        .service-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-content p {
+            color: var(--neutral-300);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-content ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-content ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--neutral-300);
+        }
+
+        .service-content ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Proceso de desarrollo */
+        .process-section {
+            background: rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .process-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(123, 74, 42, 0.05), rgba(0, 0, 0, 0.1));
+            z-index: 0;
+        }
+
+        .process-steps {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .process-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 35px;
+            top: 80px;
+            bottom: -30px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), rgba(255, 107, 53, 0.1));
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-right: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 0.5rem;
+        }
+
+        .step-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            color: var(--neutral-300);
+            margin-bottom: 1rem;
+        }
+
+        /* Proyectos relacionados */
+        .related-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-category {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .project-content p {
+            color: var(--neutral-300);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .feature-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern-dot.png');
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--neutral-200);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-col p {
+            color: var(--neutral-300);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--neutral-300);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-links i {
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--neutral-300);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .page-banner h1 {
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .cta-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .overview-content {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-image {
+                order: -1;
+                margin-bottom: 2rem;
+            }
+
+            .services-grid, .related-projects {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .header-content {
+                padding: 1rem 0;
+            }
+
+            .page-banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-banner p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .process-step {
+                flex-direction: column;
+            }
+
+            .step-number {
+                margin-bottom: 1.5rem;
+                margin-right: 0;
+            }
+
+            .process-step:not(:last-child)::after {
+                left: 35px;
+                top: 70px;
+                height: 40px;
+                width: 2px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-banner {
+                padding: 150px 0 80px;
+            }
+
+            .page-banner h1 {
+                font-size: 2rem;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Elementos de fondo -->
+<div class="grid-dots"></div>
+<div class="floating-element float-1"></div>
+<div class="floating-element float-2"></div>
+
+<!-- Cabecera -->
+<header>
+    <div class="container">
+        <div class="header-content">
+            <a href="index.html" class="logo">marron<span>.dev</span></a>
+
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html#servicios">Servicios</a></li>
+                    <li><a href="proyectos.html">Proyectos</a></li>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <a href="index.html#contacto" class="btn btn-outline">Iniciar sesión</a>
+                    <a href="index.html#contacto" class="btn btn-primary">Contáctanos</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Banner de la página -->
+<section class="page-banner">
+    <div class="container">
+        <div class="page-banner-icon">
+            <i class="fas fa-code"></i>
+        </div>
+        <h1>Desarrollo Web</h1>
+        <p>Creamos experiencias digitales atractivas, funcionales y optimizadas que conectan tu marca con tu audiencia y potencian tu negocio.</p>
+    </div>
+</section>
+
+<!-- Visión general -->
+<section class="section">
+    <div class="container">
+        <div class="overview-content">
+            <div class="overview-text" data-aos="fade-right">
+                <span class="section-subtitle">Lo que hacemos</span>
+                <h2>Desarrollo Web de Alto Rendimiento</h2>
+                <p>En marron.dev, nos especializamos en crear sitios web y aplicaciones web excepcionales que no solo impresionan visualmente, sino que también ofrecen un rendimiento óptimo en todos los dispositivos.</p>
+                <p>Nuestro enfoque se basa en utilizar las tecnologías más avanzadas para crear soluciones personalizadas que satisfagan las necesidades específicas de cada cliente, garantizando que cada proyecto sea único y efectivo.</p>
+                <p>Combinamos diseño atractivo, funcionalidad intuitiva y optimización técnica para ofrecer experiencias digitales que destacan en el competitivo mundo en línea actual.</p>
+            </div>
+
+            <div class="overview-image" data-aos="fade-left">
+                <img src="images/desarrollo-web-overview.jpg" alt="Desarrollo Web marron.dev">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tecnologías -->
+<section class="section tech-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">Tecnologías</span>
+            <h2 class="section-title">Stack Tecnológico</h2>
+            <p class="section-description">Utilizamos las tecnologías más modernas y eficientes para crear soluciones web robustas y escalables.</p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="tech-icon">
+                    <i class="fab fa-react"></i>
+                </div>
+                <h3>React</h3>
+                <p>Construimos interfaces de usuario dinámicas y de alto rendimiento con la biblioteca más popular para frontend.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="tech-icon">
+                    <i class="fab fa-node-js"></i>
+                </div>
+                <h3>Node.js</h3>
+                <p>Desarrollamos backends eficientes y escalables utilizando JavaScript del lado del servidor.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="tech-icon">
+                    <i class="fab fa-vuejs"></i>
+                </div>
+                <h3>Vue.js</h3>
+                <p>Framework progresivo para construir interfaces de usuario con un enfoque en la simplicidad y la flexibilidad.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="tech-icon">
+                    <i class="fab fa-angular"></i>
+                </div>
+                <h3>Angular</h3>
+                <p>Plataforma completa para crear aplicaciones web empresariales robustas y mantenibles.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="tech-icon">
+                    <i class="fab fa-php"></i>
+                </div>
+                <h3>PHP/Laravel</h3>
+                <p>Desarrollamos aplicaciones web rápidas y seguras con Laravel, el framework PHP más popular.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="tech-icon">
+                    <i class="fab fa-aws"></i>
+                </div>
+                <h3>AWS</h3>
+                <p>Implementamos soluciones en la nube de Amazon Web Services para máxima escalabilidad y disponibilidad.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="tech-icon">
+                    <i class="fab fa-wordpress"></i>
+                </div>
+                <h3>WordPress</h3>
+                <p>Creamos sitios web personalizados y fáciles de gestionar con el CMS más utilizado en el mundo.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="tech-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>MySQL/MongoDB</h3>
+                <p>Utilizamos bases de datos SQL y NoSQL según las necesidades específicas de cada proyecto.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Servicios específicos -->
+<section class="section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">Nuestros servicios</span>
+            <h2 class="section-title">Soluciones Web a Medida</h2>
+            <p class="section-description">Ofrecemos una amplia gama de servicios de desarrollo web adaptados a tus necesidades específicas.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-image">
+                    <img src="images/desarrollo-sitios-web.jpg" alt="Sitios Web Corporativos">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Sitios Web Corporativos</h3>
+                    <p>Creamos sitios web profesionales que representan la identidad de tu empresa y potencian tu presencia digital.</p>
+                    <ul>
+                        <li>Diseño personalizado y atractivo</li>
+                        <li>Totalmente responsivo para todos los dispositivos</li>
+                        <li>Optimizado para SEO</li>
+                        <li>Integración con herramientas de analítica</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-image">
+                    <img src="images/desarrollo-ecommerce.jpg" alt="Plataformas E-commerce">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Plataformas E-commerce</h3>
+                    <p>Desarrollamos tiendas online completas y seguras que maximizan tus ventas y mejoran la experiencia del usuario.</p>
+                    <ul>
+                        <li>Integración con múltiples pasarelas de pago</li>
+                        <li>Gestión eficiente de inventario</li>
+                        <li>Experiencia de compra optimizada</li>
+                        <li>Seguridad de datos y transacciones</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-image">
+                    <img src="images/desarrollo-aplicaciones-web.jpg" alt="Aplicaciones Web">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Aplicaciones Web Avanzadas</h3>
+                    <p>Creamos aplicaciones web sofisticadas con funcionalidades complejas para resolver necesidades específicas de tu negocio.</p>
+                    <ul>
+                        <li>Single Page Applications (SPA)</li>
+                        <li>Progressive Web Apps (PWA)</li>
+                        <li>Integraciones con APIs externas</li>
+                        <li>Soluciones a medida para tu modelo de negocio</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-image">
+                    <img src="images/desarrollo-cms.jpg" alt="Sistemas de Gestión de Contenidos">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Sistemas de Gestión de Contenidos</h3>
+                    <p>Implementamos CMS personalizados que te permiten actualizar y gestionar tu sitio web con facilidad.</p>
+                    <ul>
+                        <li>WordPress personalizado</li>
+                        <li>Drupal para sitios complejos</li>
+                        <li>Desarrollo de temas y plugins a medida</li>
+                        <li>Formación para tu equipo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-image">
+                    <img src="images/desarrollo-portales.jpg" alt="Portales y Plataformas">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Portales y Plataformas</h3>
+                    <p>Desarrollamos portales complejos y plataformas digitales para múltiples usuarios y funcionalidades avanzadas.</p>
+                    <ul>
+                        <li>Intranets corporativas</li>
+                        <li>Plataformas educativas</li>
+                        <li>Sistemas de gestión de proyectos</li>
+                        <li>Portales de servicios</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-image">
+                    <img src="images/desarrollo-mantenimiento.jpg" alt="Mantenimiento y Optimización">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Mantenimiento y Optimización</h3>
+                    <p>Ofrecemos servicios continuos para mantener tu sitio web actualizado, seguro y con un rendimiento óptimo.</p>
+                    <ul>
+                        <li>Actualizaciones de seguridad</li>
+                        <li>Mejoras de rendimiento</li>
+                        <li>Optimización de velocidad</li>
+                        <li>Soporte técnico continuo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Proceso de desarrollo -->
+<section class="section process-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">Cómo trabajamos</span>
+            <h2 class="section-title">Nuestro Proceso de Desarrollo</h2>
+            <p class="section-description">Seguimos una metodología estructurada que garantiza resultados de alta calidad en cada proyecto.</p>
+        </div>
+
+        <div class="process-steps">
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Descubrimiento y Planificación</h3>
+                    <p>Comenzamos con una fase de descubrimiento donde entendemos tus objetivos, necesidades y expectativas. Analizamos tu marca, mercado y competencia para definir una estrategia clara y un plan de acción detallado.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Diseño de UX/UI</h3>
+                    <p>Creamos wireframes y prototipos que visualizan la estructura y el flujo de tu sitio web. Luego, diseñamos interfaces atractivas y centradas en el usuario que reflejan la identidad de tu marca y garantizan una experiencia óptima.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Desarrollo Front-end y Back-end</h3>
+                    <p>Nuestros desarrolladores convierten los diseños en código, implementando la parte visual (front-end) y la funcionalidad (back-end) de tu sitio. Utilizamos las tecnologías más adecuadas para cada proyecto y seguimos las mejores prácticas.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Pruebas y Control de Calidad</h3>
+                    <p>Realizamos exhaustivas pruebas para garantizar que todo funcione correctamente en diferentes dispositivos, navegadores y velocidades de conexión. Verificamos la usabilidad, accesibilidad y rendimiento para asegurar una experiencia óptima.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Lanzamiento y Despliegue</h3>
+                    <p>Implementamos tu sitio web en el servidor de producción, configurando aspectos técnicos como certificados SSL, cachés y optimizaciones de rendimiento. Nos aseguramos de que el lanzamiento sea suave y sin interrupciones.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>Soporte y Mantenimiento</h3>
+                    <p>Ofrecemos soporte continuo para mantener tu sitio web actualizado, seguro y funcionando de manera óptima. Implementamos mejoras, realizamos copias de seguridad y resolvemos cualquier incidencia que pueda surgir.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Proyectos relacionados -->
+<section class="section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">Portfolio</span>
+            <h2 class="section-title">Proyectos Destacados</h2>
+            <p class="section-description">Explora algunos de nuestros trabajos más recientes en desarrollo web.</p>
+        </div>
+
+        <div class="related-projects">
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-image">
+                    <img src="images/proyecto1.jpg" alt="E-commerce Fashion Store" class="high-quality-image">
+                    <div class="project-overlay">
+                        <a href="proyecto-detalle.html?id=1" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Desarrollo Web</span>
+                    <h3>E-commerce Fashion Store</h3>
+                    <p>Plataforma de comercio electrónico para una marca de moda que aumentó sus ventas en un 150% en el primer trimestre tras su lanzamiento.</p>
+                    <a href="proyecto-detalle.html?id=1" class="feature-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-image">
+                    <img src="images/proyecto6.jpg" alt="Corporate Website Redesign" class="high-quality-image">
+                    <div class="project-overlay">
+                        <a href="proyecto-detalle.html?id=6" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Desarrollo Web</span>
+                    <h3>Corporate Website Redesign</h3>
+                    <p>Rediseño completo del sitio web corporativo para una empresa internacional, con enfoque en experiencia de usuario y optimización para móviles.</p>
+                    <a href="proyecto-detalle.html?id=6" class="feature-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-image">
+                    <img src="images/proyecto-web3.jpg" alt="Portal Educativo Online" class="high-quality-image">
+                    <div class="project-overlay">
+                        <a href="proyecto-detalle.html?id=10" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Desarrollo Web</span>
+                    <h3>Portal Educativo Online</h3>
+                    <p>Plataforma educativa con sistema de cursos, evaluaciones y seguimiento para una institución académica líder en el sector.</p>
+                    <a href="proyecto-detalle.html?id=10" class="feature-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section">
+    <div class="container">
+        <div class="cta-content" data-aos="fade-up">
+            <h2>¿Listo para impulsar tu presencia web?</h2>
+            <p>Contáctanos hoy mismo para discutir tu proyecto y cómo podemos ayudarte a alcanzar tus objetivos digitales.</p>
+            <div class="cta-buttons">
+                <a href="index.html#contacto" class="btn btn-primary">Solicitar presupuesto <i class="fas fa-arrow-right"></i></a>
+                <a href="proyectos.html" class="btn btn-outline">Ver más proyectos <i class="fas fa-eye"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-col">
+                <a href="index.html" class="logo">marron<span>.dev</span></a>
+                <p>Soluciones tecnológicas de vanguardia para impulsar el crecimiento de tu negocio en la era digital.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#nosotros"><i class="fas fa-chevron-right"></i> Sobre nosotros</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Nuestro equipo</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Carreras</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                    <li><a href="index.html#contacto"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Servicios</h4>
+                <ul class="footer-links">
+                    <li><a href="desarrollo-web.html"><i class="fas fa-chevron-right"></i> Desarrollo Web</a></li>
+                    <li><a href="aplicaciones-moviles.html"><i class="fas fa-chevron-right"></i> Aplicaciones Móviles</a></li>
+                    <li><a href="inteligencia-artificial.html"><i class="fas fa-chevron-right"></i> Inteligencia Artificial</a></li>
+                    <li><a href="analitica-datos.html"><i class="fas fa-chevron-right"></i> Analítica de Datos</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Documentación</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Tutoriales</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Preguntas frecuentes</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Centro de ayuda</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> API</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 marron.dev. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    // Inicializar AOS (Animaciones al hacer scroll)
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: true
+        });
+
+        // Efecto de header al hacer scroll
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(18, 18, 18, 0.95)';
+                header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(18, 18, 18, 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Menú móvil
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const nav = document.querySelector('nav');
+
+        mobileToggle.addEventListener('click', function() {
+            nav.classList.toggle('mobile-active');
+        });
+    });
+</script>
+</body>
+</html>

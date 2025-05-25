@@ -1,0 +1,1696 @@
+/* Responsive */
+@media (max-width: 1200px) {
+.page-banner h1 {
+font-size: 3.5rem;
+}
+
+.section-title {
+font-size: 2.5rem;
+}
+
+.cta-content h2 {
+font-size: 2.5rem;
+}
+
+.platforms-container {
+flex-direction: column;
+align-items: center;
+}
+}
+
+@media (max-width: 992px) {
+.overview-content {
+grid-template-columns: 1fr;
+}
+
+.overview-image {
+order: -1;
+margin-bottom: 2rem;
+}
+
+.services-grid {
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.related-projects {
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.benefits-container {
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.cta-buttons {
+flex-direction: column;
+align-items: center;
+}
+
+.cta-buttons .btn {
+width: 100%;
+max-width: 400px;
+}
+}
+
+@media (max-width: 768px) {
+.container {
+width: 90%;
+}
+
+nav ul {
+display: none;
+}
+
+.mobile-toggle {
+display: block;
+}
+
+.nav-actions {
+display: none;
+}
+
+.header-content {
+padding: 1rem 0;
+}
+
+.page-banner h1 {
+font-size: 2.5rem;
+}
+
+.page-banner p {
+font-size: 1rem;
+}
+
+.section-title {
+font-size: 2rem;
+}
+
+.process-step {
+flex-direction: column;
+}
+
+.step-number {
+margin-bottom: 1.5rem;
+margin-right: 0;
+}
+
+.process-step:not(:last-child)::after {
+left: 35px;
+top: 70px;
+height: 40px;
+width: 2px;
+}
+}
+
+@media (max-width: 576px) {
+.page-banner {
+padding: 150px 0 80px;
+}
+
+.page-banner h1 {
+font-size: 2rem;
+}
+
+.tech-grid {
+grid-template-columns: 1fr 1fr;
+}
+}    </style>
+</head>
+<body>
+<!-- Elementos de fondo -->
+<div class="grid-dots"></div>
+<div class="floating-element float-1"></div>
+<div class="floating-element float-2"></div>
+
+<!-- Cabecera -->
+<header>
+    <div class="container">
+        <div class="header-content">
+            <a href="index.html" class="logo">marron<span>.dev</span></a>
+
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html#servicios">Servicios</a></li>
+                    <li><a href="proyectos.html">Proyectos</a></li>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <a href="index.html#contacto" class="btn btn-outline">Iniciar sesión</a>
+                    <a href="index.html#contacto" class="btn btn-primary">Contáctanos</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- Banner de la página -->
+<section class="page-banner">
+    <div class="container">
+        <div class="page-banner-icon">
+            <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h1>Aplicaciones Móviles</h1>
+        <p>Desarrollamos aplicaciones nativas e híbridas de alto rendimiento que conectan tu marca con tus usuarios en cualquier momento y lugar.</p>
+    </div>
+</section>
+
+<!-- Visión general -->
+<section class="section">
+    <div class="container">
+        <div class="overview-content">
+            <div class="overview-text" data-aos="fade-right">
+                <span class="section-subtitle">Lo que hacemos</span>
+                <h2>Desarrollo de Apps Innovadoras</h2>
+                <p>En marron.dev, creamos aplicaciones móviles excepcionales que destacan en el competitivo mercado de apps. Diseñamos experiencias de usuario fluidas e intuitivas que se adaptan perfectamente a las necesidades de tu audiencia.</p>
+                <p>Nuestro equipo de expertos desarrolladores combina creatividad, conocimiento técnico y las últimas tendencias tecnológicas para entregar soluciones móviles personalizadas que impulsan el crecimiento de tu negocio.</p>
+                <p>Desde aplicaciones de comercio electrónico hasta plataformas de gestión empresarial, creamos soluciones específicas para cada sector, siempre enfocándonos en la usabilidad, el rendimiento y la seguridad.</p>
+            </div>
+
+            <div class="overview-image" data-aos="fade-left">
+                <img src="images/aplicaciones-moviles-overview.jpg" alt="Desarrollo de Aplicaciones Móviles marron.dev">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Plataformas -->
+<section class="section platforms-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">Plataformas</span>
+            <h2 class="section-title">Desarrollo Multiplataforma</h2>
+            <p class="section-description">Creamos aplicaciones optimizadas para los principales sistemas operativos móviles, garantizando la mejor experiencia en cada plataforma.</p>
+        </div>
+
+        <div class="platforms-container">
+            <div class="platform-box" data-aos="fade-up" data-aos-delay="100">
+                <div class="platform-icon">
+                    <i class="fab fa-apple"></i>
+                </div>
+                <h3>iOS</h3>
+                <p>Desarrollamos aplicaciones nativas para iPhone y iPad con interfaces elegantes y un rendimiento impecable, siguiendo las directrices de diseño de Apple.</p>
+                <div class="platform-technologies">
+                    <span class="platform-tech">Swift</span>
+                    <span class="platform-tech">SwiftUI</span>
+                    <span class="platform-tech">Objective-C</span>
+                </div>
+            </div>
+
+            <div class="platform-box" data-aos="fade-up" data-aos-delay="200">
+                <div class="platform-icon">
+                    <i class="fab fa-android"></i>
+                </div>
+                <h3>Android</h3>
+                <p>Creamos aplicaciones Android optimizadas para la amplia gama de dispositivos del mercado, con un enfoque en la experiencia de usuario y el rendimiento.</p>
+                <div class="platform-technologies">
+                    <span class="platform-tech">Kotlin</span>
+                    <span class="platform-tech">Java</span>
+                    <span class="platform-tech">Jetpack Compose</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tecnologías -->
+<section class="section tech-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">Tecnologías</span>
+            <h2 class="section-title">Stack Tecnológico</h2>
+            <p class="section-description">Utilizamos las tecnologías más avanzadas para desarrollar aplicaciones móviles de alta calidad y rendimiento.</p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="tech-icon">
+                    <i class="fab fa-react"></i>
+                </div>
+                <h3>React Native</h3>
+                <p>Desarrollo multiplataforma con una única base de código para iOS y Android.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="tech-icon">
+                    <i class="fab fa-swift"></i>
+                </div>
+                <h3>Swift</h3>
+                <p>Desarrollo nativo para iOS con el lenguaje de programación oficial de Apple.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="tech-icon">
+                    <i class="fab fa-android"></i>
+                </div>
+                <h3>Kotlin</h3>
+                <p>Lenguaje moderno para el desarrollo de aplicaciones Android de alto rendimiento.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="tech-icon">
+                    <i class="fab fa-flutter"></i>
+                </div>
+                <h3>Flutter</h3>
+                <p>Framework de Google para crear interfaces nativas en iOS y Android con un único código base.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="tech-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3>Firebase</h3>
+                <p>Plataforma de desarrollo de Google para autenticación, base de datos y analítica.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="tech-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>GraphQL</h3>
+                <p>Lenguaje de consulta para APIs que minimiza la cantidad de datos transferidos.</p>
+            </div>
+
+            <div class="tech-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="tech-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Ionic</h3>
+                <p>Framework para el desarrollo de aplicaciones híbridas con tecnología web.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Servicios específicos -->
+<section class="section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">Nuestros servicios</span>
+            <h2 class="section-title">Soluciones Móviles a Medida</h2>
+            <p class="section-description">Ofrecemos servicios completos de desarrollo de aplicaciones móviles adaptados a las necesidades específicas de tu negocio.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-image">
+                    <img src="images/app-nativa.jpg" alt="Apps Nativas">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Aplicaciones Nativas</h3>
+                    <p>Desarrollo de aplicaciones específicas para iOS y Android con el mejor rendimiento y experiencia de usuario.</p>
+                    <ul>
+                        <li>Máximo rendimiento y capacidad de respuesta</li>
+                        <li>Acceso completo a características del dispositivo</li>
+                        <li>Integración perfecta con el sistema operativo</li>
+                        <li>Experiencia de usuario optimizada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-image">
+                    <img src="images/app-hibrida.jpg" alt="Apps Híbridas">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Aplicaciones Híbridas</h3>
+                    <p>Soluciones costo-efectivas que funcionan en múltiples plataformas con una única base de código.</p>
+                    <ul>
+                        <li>Desarrollo más rápido y económico</li>
+                        <li>Misma experiencia en iOS y Android</li>
+                        <li>Mantenimiento simplificado</li>
+                        <li>Ideal para MVP y validación de conceptos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-image">
+                    <img src="images/app-commerce.jpg" alt="E-commerce Móvil">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>E-commerce Móvil</h3>
+                    <p>Aplicaciones de comercio electrónico que maximizan las ventas y ofrecen una experiencia de compra excepcional.</p>
+                    <ul>
+                        <li>Catálogos de productos dinámicos</li>
+                        <li>Pasarelas de pago seguras</li>
+                        <li>Gestión de perfiles y wishlist</li>
+                        <li>Notificaciones push de ofertas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-image">
+                    <img src="images/app-empresarial.jpg" alt="Apps Empresariales">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Aplicaciones Empresariales</h3>
+                    <p>Soluciones B2B y B2E que optimizan procesos internos y mejoran la productividad de los equipos.</p>
+                    <ul>
+                        <li>Integración con sistemas existentes</li>
+                        <li>Gestión de datos empresariales</li>
+                        <li>Reportes y dashboards personalizados</li>
+                        <li>Funcionalidades offline</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-image">
+                    <img src="images/app-mantenimiento.jpg" alt="Mantenimiento y Optimización">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <h3>Mantenimiento y Actualizaciones</h3>
+                    <p>Servicios continuos para mantener tu aplicación actualizada, segura y con un rendimiento óptimo.</p>
+                    <ul>
+                        <li>Actualizaciones para nuevas versiones de iOS y Android</li>
+                        <li>Corrección de errores y optimización</li>
+                        <li>Implementación de nuevas funcionalidades</li>
+                        <li>Análisis de métricas y comportamiento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Beneficios -->
+<section class="section tech-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">¿Por qué una app?</span>
+            <h2 class="section-title">Beneficios de las Aplicaciones Móviles</h2>
+            <p class="section-description">Descubre cómo una aplicación móvil puede transformar tu negocio y conectarte de forma más efectiva con tus clientes.</p>
+        </div>
+
+        <div class="benefits-container">
+            <div class="benefit-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="benefit-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Mayor Engagement</h3>
+                <p>Las aplicaciones móviles ofrecen una forma directa y personalizada de interactuar con tus usuarios, aumentando su fidelidad y tiempo de permanencia.</p>
+            </div>
+
+            <div class="benefit-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="benefit-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Notificaciones Push</h3>
+                <p>Comunica promociones, novedades y contenido relevante directamente a los usuarios, incluso cuando no están usando activamente la aplicación.</p>
+            </div>
+
+            <div class="benefit-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="benefit-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Análisis de Datos</h3>
+                <p>Obtén información valiosa sobre el comportamiento de tus usuarios para mejorar tus productos y servicios de forma continua.</p>
+            </div>
+
+            <div class="benefit-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="benefit-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Experiencia Offline</h3>
+                <p>Permite a los usuarios acceder a funcionalidades básicas incluso sin conexión a internet, mejorando la experiencia en cualquier situación.</p>
+            </div>
+
+            <div class="benefit-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="benefit-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3>Visibilidad de Marca</h3>
+                <p>Tu aplicación aparecerá en las tiendas de aplicaciones y en las pantallas de los dispositivos de tus usuarios, reforzando tu presencia de marca.</p>
+            </div>
+
+            <div class="benefit-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="benefit-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Mayor Seguridad</h3>
+                <p>Las aplicaciones nativas ofrecen capas adicionales de seguridad para proteger los datos y las transacciones de tus usuarios.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Proceso de desarrollo -->
+<section class="section process-section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">Cómo trabajamos</span>
+            <h2 class="section-title">Nuestro Proceso de Desarrollo</h2>
+            <p class="section-description">Seguimos una metodología ágil que garantiza la entrega de aplicaciones de alta calidad, dentro del plazo y presupuesto establecidos.</p>
+        </div>
+
+        <div class="process-steps">
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Descubrimiento y Planificación</h3>
+                    <p>Analizamos tus requisitos, objetivos de negocio y perfil de usuarios para definir la estrategia de la aplicación. Definimos funcionalidades, plataformas objetivo y arquitectura tecnológica.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Diseño de UX/UI</h3>
+                    <p>Creamos wireframes y prototipos interactivos que visualizan la estructura y el flujo de tu aplicación. Diseñamos interfaces intuitivas y atractivas adaptadas a las guías de cada plataforma.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Desarrollo Ágil</h3>
+                    <p>Utilizamos metodologías ágiles con sprints de 1-2 semanas para el desarrollo iterativo. Implementamos las funcionalidades por prioridad, permitiendo revisiones y ajustes regulares.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Pruebas y Control de Calidad</h3>
+                    <p>Realizamos pruebas exhaustivas en diferentes dispositivos y condiciones. Verificamos la funcionalidad, usabilidad, rendimiento y seguridad para garantizar una experiencia óptima.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Lanzamiento en App Stores</h3>
+                    <p>Preparamos los materiales necesarios para las tiendas de aplicaciones y gestionamos el proceso de publicación en Apple App Store y Google Play Store, siguiendo las directrices de cada plataforma.</p>
+                </div>
+            </div>
+
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>Soporte y Evolución</h3>
+                    <p>Proporcionamos mantenimiento continuo, actualizaciones regulares y soporte técnico. Analizamos métricas de uso y comportamiento para implementar mejoras continuas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Proyectos relacionados -->
+<section class="section">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-subtitle">Portfolio</span>
+            <h2 class="section-title">Proyectos Destacados</h2>
+            <p class="section-description">Explora algunos de nuestros trabajos más recientes en desarrollo de aplicaciones móviles.</p>
+        </div>
+
+        <div class="related-projects">
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-image">
+                    <img src="images/proyecto2.jpg" alt="HealthTrack App" class="high-quality-image">
+                    <div class="project-overlay">
+                        <a href="proyecto-detalle.html?id=2" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Aplicaciones Móviles</span>
+                    <h3>HealthTrack App</h3>
+                    <p>Aplicación móvil de seguimiento de salud con más de 50,000 descargas y una calificación promedio de 4.8 estrellas en las tiendas de aplicaciones.</p>
+                    <a href="proyecto-detalle.html?id=2" class="feature-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-image">
+                    <img src="images/proyecto7.jpg" alt="Food Delivery Platform" class="high-quality-image">
+                    <div class="project-overlay">
+                        <a href="proyecto-detalle.html?id=7" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Aplicaciones Móviles</span>
+                    <h3>Food Delivery Platform</h3>
+                    <p>Aplicación de entrega de comida a domicilio que conecta a restaurantes locales con clientes, con sistema de seguimiento en tiempo real.</p>
+                    <a href="proyecto-detalle.html?id=7" class="feature-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-image">
+                    <img src="images/proyecto-app3.jpg" alt="Fitness Tracker App" class="high-quality-image">
+                    <div class="project-overlay">
+                        <a href="proyecto-detalle.html?id=11" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Aplicaciones Móviles</span>
+                    <h3>Fitness Tracker App</h3>
+                    <p>Aplicación de seguimiento de fitness con planes de entrenamiento, progreso en tiempo real y comunidad de usuarios para compartir logros.</p>
+                    <a href="proyecto-detalle.html?id=11" class="feature-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section">
+    <div class="container">
+        <div class="cta-content" data-aos="fade-up">
+            <h2>¿Listo para crear tu aplicación móvil?</h2>
+            <p>Contáctanos hoy mismo para discutir tu proyecto y cómo podemos ayudarte a llevar tu negocio al siguiente nivel con una aplicación móvil personalizada.</p>
+            <div class="cta-buttons">
+                <a href="index.html#contacto" class="btn btn-primary">Solicitar presupuesto <i class="fas fa-arrow-right"></i></a>
+                <a href="proyectos.html" class="btn btn-outline">Ver más proyectos <i class="fas fa-eye"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-col">
+                <a href="index.html" class="logo">marron<span>.dev</span></a>
+                <p>Soluciones tecnológicas de vanguardia para impulsar el crecimiento de tu negocio en la era digital.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#nosotros"><i class="fas fa-chevron-right"></i> Sobre nosotros</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Nuestro equipo</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Carreras</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                    <li><a href="index.html#contacto"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Servicios</h4>
+                <ul class="footer-links">
+                    <li><a href="desarrollo-web.html"><i class="fas fa-chevron-right"></i> Desarrollo Web</a></li>
+                    <li><a href="aplicaciones-moviles.html"><i class="fas fa-chevron-right"></i> Aplicaciones Móviles</a></li>
+                    <li><a href="inteligencia-artificial.html"><i class="fas fa-chevron-right"></i> Inteligencia Artificial</a></li>
+                    <li><a href="analitica-datos.html"><i class="fas fa-chevron-right"></i> Analítica de Datos</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Documentación</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Tutoriales</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Preguntas frecuentes</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Centro de ayuda</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> API</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 marron.dev. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    // Inicializar AOS (Animaciones al hacer scroll)
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: true
+        });
+
+        // Efecto de header al hacer scroll
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(18, 18, 18, 0.95)';
+                header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(18, 18, 18, 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Menú móvil
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const nav = document.querySelector('nav');
+
+        mobileToggle.addEventListener('click', function() {
+            nav.classList.toggle('mobile-active');
+        });
+    });
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicaciones Móviles | marron.dev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #7B4A2A;
+            --primary-light: #9B6C4E;
+            --primary-dark: #5C3114;
+            --accent: #FF6B35;
+            --dark: #121212;
+            --light: #FAFAFA;
+            --neutral-100: #F5F5F5;
+            --neutral-200: #E5E5E5;
+            --neutral-300: #D4D4D4;
+            --neutral-800: #262626;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --blur-amount: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Efecto de fondo futurista */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                    radial-gradient(circle at 50% 10%, rgba(123, 74, 42, 0.3) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 70%, rgba(255, 107, 53, 0.2) 0%, transparent 40%),
+                    radial-gradient(circle at 10% 60%, rgba(123, 74, 42, 0.2) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* Malla de puntos */
+        .grid-dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                    radial-gradient(var(--neutral-800) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        /* Elementos flotantes de decoración */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        .float-1 {
+            width: 350px;
+            height: 350px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+            animation: float 20s infinite alternate ease-in-out;
+            opacity: 0.2;
+        }
+
+        .float-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            bottom: 100px;
+            left: -150px;
+            animation: float 15s infinite alternate-reverse ease-in-out;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(10deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            background: rgba(18, 18, 18, 0.8);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--light);
+            text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            left: -10px;
+            top: -10px;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.7;
+        }
+
+        .container {
+            width: 85%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-left: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--light);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--light);
+            border: none;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(92, 49, 20, 0.3);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Banner de la página */
+        .page-banner {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern-dot.png');
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .page-banner-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .page-banner .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-banner h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .page-banner p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--neutral-200);
+        }
+
+        /* Sección principal */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--neutral-300);
+        }
+
+        /* Descripción general */
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .overview-image {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .overview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overview-text {
+            max-width: 600px;
+        }
+
+        .overview-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .overview-text p {
+            margin-bottom: 1.5rem;
+            color: var(--neutral-300);
+        }
+
+        /* Tecnologías */
+        .tech-section {
+            background: rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .tech-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(123, 74, 42, 0.1), rgba(0, 0, 0, 0.2));
+            z-index: 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover .tech-icon {
+            transform: scale(1.1);
+        }
+
+        .tech-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .tech-item p {
+            color: var(--neutral-300);
+            font-size: 0.9rem;
+        }
+
+        /* Servicios específicos */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+
+        .service-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-content p {
+            color: var(--neutral-300);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-content ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-content ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--neutral-300);
+        }
+
+        .service-content ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Proceso de desarrollo */
+        .process-section {
+            background: rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .process-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(123, 74, 42, 0.05), rgba(0, 0, 0, 0.1));
+            z-index: 0;
+        }
+
+        .process-steps {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .process-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 35px;
+            top: 80px;
+            bottom: -30px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), rgba(255, 107, 53, 0.1));
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-right: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 0.5rem;
+        }
+
+        .step-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            color: var(--neutral-300);
+            margin-bottom: 1rem;
+        }
+
+        /* Plataformas móviles */
+        .platforms-section {
+            position: relative;
+        }
+
+        .platforms-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .platform-box {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 400px;
+            transition: all 0.3s ease;
+        }
+
+        .platform-box:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .platform-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .platform-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .platform-box p {
+            color: var(--neutral-300);
+            margin-bottom: 1.5rem;
+        }
+
+        .platform-technologies {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .platform-tech {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--neutral-200);
+        }
+
+        /* Proyectos relacionados */
+        .related-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-category {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .project-content p {
+            color: var(--neutral-300);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .feature-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Beneficios */
+        .benefits-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(123, 74, 42, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--accent);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover .benefit-icon {
+            background: rgba(255, 107, 53, 0.2);
+            transform: scale(1.1);
+        }
+
+        .benefit-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .benefit-item p {
+            color: var(--neutral-300);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern-dot.png');
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--neutral-200);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-col p {
+            color: var(--neutral-300);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--neutral-300);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-links i {
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--neutral-300);
+            font-size: 0.9rem;
+        }

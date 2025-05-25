@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - marron.dev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        :root {
+            --primary: #7B4A2A;
+            --primary-light: #9B6C4E;
+            --primary-dark: #5C3114;
+            --accent: #FF6B35;
+            --accent-light: #FF8A5B;
+            --accent-glow: rgba(255, 107, 53, 0.1);
+            --white: #FFFFFF;
+            --off-white: #FAFAFA;
+            --light-gray: #F8F8F8;
+            --medium-gray: #E8E8E8;
+            --text-dark: #1A1A1A;
+            --text-medium: #4A4A4A;
+            --text-light: #7A7A7A;
+            --border-light: rgba(0, 0, 0, 0.06);
+            --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.04);
+            --shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.08);
+            --shadow-large: 0 20px 80px rgba(0, 0, 0, 0.12);
+            --success: #10B981;
+            --error: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 50%, var(--accent-glow) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(123, 74, 42, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, var(--accent-glow) 0%, transparent 50%);
+            animation: backgroundShift 30s ease-in-out infinite alternate;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes backgroundShift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-40px, -40px) rotate(3deg); }
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--text-dark);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgba(26, 26, 26, 0.15);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            mix-blend-mode: normal;
+        }
+
+        .cursor-follower.hover {
+            width: 40px;
+            height: 40px;
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2.5rem 4rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            transition: all 0.3s ease;
+        }
+
+        .logo::after {
+            content: '.dev';
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--primary);
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--border-light);
+            border-radius: 25px;
+        }
+
+        .nav-back:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            gap: 0.75rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--white);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at top left, var(--accent-glow) 0%, transparent 40%),
+                radial-gradient(ellipse at bottom right, rgba(123, 74, 42, 0.05) 0%, transparent 40%);
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 12vw, 7rem);
+            font-weight: 300;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+            opacity: 0;
+            animation: titleReveal 1.5s ease forwards 0.5s;
+        }
+
+        .hero-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+            margin: 2rem auto 0;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 1.2s;
+        }
+
+        @keyframes titleReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 1s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        /* Contact Form Section */
+        .contact-container {
+            padding: 8rem 2rem;
+            background: var(--off-white);
+            position: relative;
+        }
+
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 30% 20%, var(--accent-glow) 0%, transparent 30%),
+                radial-gradient(circle at 70% 80%, rgba(123, 74, 42, 0.05) 0%, transparent 30%);
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            padding: 2rem 0;
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 300;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-description {
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-detail:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .contact-detail-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-glow);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.25rem;
+        }
+
+        .contact-detail-info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-detail-info p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+        }
+
+        /* Form Styles */
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--primary) 100%);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group.half {
+            display: inline-block;
+            width: calc(50% - 0.5rem);
+        }
+
+        .form-group.half:first-child {
+            margin-right: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--text-dark);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            resize: none;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        .form-input:focus + .form-label,
+        .form-textarea:focus + .form-label,
+        .form-select:focus + .form-label {
+            color: var(--accent);
+        }
+
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .form-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .form-submit:hover::before {
+            left: 0;
+        }
+
+        .form-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-submit.loading {
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        .form-submit.loading .loading-spinner {
+            display: block;
+        }
+
+        .form-submit.loading .submit-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success/Error Messages */
+        .form-message {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 500;
+        }
+
+        .form-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .form-message.show {
+            display: flex;
+        }
+
+        /* Validation Styles */
+        .form-input.error,
+        .form-textarea.error,
+        .form-select.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .form-error {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .form-error.show {
+            display: block;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .contact-container {
+                padding: 4rem 1rem;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .form-group.half {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-container">
+        <a href="index.html" class="logo">marron</a>
+        <a href="index.html" class="nav-back">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back Home</span>
+        </a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">Let's Talk</h1>
+        <p class="hero-subtitle">
+            Ready to bring your vision to life? We'd love to hear about your project and explore how we can help.
+        </p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-container">
+    <div class="contact-content">
+
+        <!-- Contact Info -->
+        <div class="contact-info fade-in">
+            <h2>Get In Touch</h2>
+            <p class="contact-description">
+                Whether you have a project in mind, need a consultation, or just want to say hello, we're here to help. Let's create something amazing together.
+            </p>
+
+            <div class="contact-details">
+                <div class="contact-detail">
+                    <div class="contact-detail-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-detail-info">
+                        <h4>Email</h4>
+                        <p>hello@marron.dev</p>
+                    </div>
+                </div>
+
+                <div class="contact-detail">
+                    <div class="contact-detail-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-detail-info">
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+
+                <div class="contact-detail">
+                    <div class="contact-detail-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-detail-info">
+                        <h4>Location</h4>
+                        <p>San Francisco, CA</p>
+                    </div>
+                </div>
+
+                <div class="contact-detail">
+                    <div class="contact-detail-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-detail-info">
+                        <h4>Response Time</h4>
+                        <p>Within 24 hours</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form fade-in">
+            <form id="contactForm">
+
+                <!-- Success/Error Messages -->
+                <div id="formMessage" class="form-message">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="messageText"></span>
+                </div>
+
+                <!-- Name Fields -->
+                <div class="form-group half">
+                    <label for="firstName" class="form-label">First Name *</label>
+                    <input type="text" id="firstName" name="firstName" class="form-input" required>
+                    <div class="form-error" id="firstNameError">Please enter your first name</div>
+                </div>
+
+                <div class="form-group half">
+                    <label for="lastName" class="form-label">Last Name *</label>
+                    <input type="text" id="lastName" name="lastName" class="form-input" required>
+                    <div class="form-error" id="lastNameError">Please enter your last name</div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address *</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                    <div class="form-error" id="emailError">Please enter a valid email address</div>
+                </div>
+
+                <!-- Company -->
+                <div class="form-group">
+                    <label for="company" class="form-label">Company</label>
+                    <input type="text" id="company" name="company" class="form-input">
+                </div>
+
+                <!-- Project Type -->
+                <div class="form-group">
+                    <label for="projectType" class="form-label">Project Type *</label>
+                    <select id="projectType" name="projectType" class="form-select" required>
+                        <option value="">Select a service</option>
+                        <option value="ui-ux-design">UI/UX Design</option>
+                        <option value="web-development">Web Development</option>
+                        <option value="mobile-solutions">Mobile Solutions</option>
+                        <option value="brand-identity">Brand Identity</option>
+                        <option value="digital-strategy">Digital Strategy</option>
+                        <option value="product-launch">Product Launch</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="form-error" id="projectTypeError">Please select a project type</div>
+                </div>
+
+                <!-- Budget -->
+                <div class="form-group">
+                    <label for="budget" class="form-label">Budget Range</label>
+                    <select id="budget" name="budget" class="form-select">
+                        <option value="">Select budget range</option>
+                        <option value="5k-15k">$5K - $15K</option>
+                        <option value="15k-30k">$15K - $30K</option>
+                        <option value="30k-50k">$30K - $50K</option>
+                        <option value="50k-100k">$50K - $100K</option>
+                        <option value="100k+">$100K+</option>
+                    </select>
+                </div>
+
+                <!-- Message -->
+                <div class="form-group">
+                    <label for="message" class="form-label">Tell us about your project *</label>
+                    <textarea id="message" name="message" class="form-textarea"
+                              placeholder="Describe your project, goals, timeline, and any specific requirements..." required></textarea>
+                    <div class="form-error" id="messageError">Please tell us about your project</div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="form-submit" id="submitBtn">
+                    <div class="loading-spinner"></div>
+                    <span class="submit-text">Send Message</span>
+                    <i class="fas fa-arrow-right submit-icon"></i>
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    // Configuration
+    const API_URL = 'http://localhost:5000/api/contact';
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Contact form initialized');
+
+        if (window.innerWidth > 768) {
+            initCursor();
+        }
+        initScrollAnimations();
+        initForm();
+    });
+
+    // Custom cursor
+    function initCursor() {
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        function animateFollower() {
+            followerX += (mouseX - followerX) * 0.1;
+            followerY += (mouseY - followerY) * 0.1;
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .contact-detail');
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorFollower.classList.add('hover');
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorFollower.classList.remove('hover');
+            });
+        });
+    }
+
+    // Scroll animations
+    function initScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+    // Form functionality
+    function initForm() {
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+        const messageText = document.getElementById('messageText');
+
+        console.log('📝 Form elements initialized');
+
+        // Form validation
+        function validateField(field) {
+            const value = field.value.trim();
+            const errorElement = document.getElementById(field.id + 'Error');
+            let isValid = true;
+
+            // Remove previous error state
+            field.classList.remove('error');
+            if (errorElement) errorElement.classList.remove('show');
+
+            // Check if required field is empty
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+            }
+
+            // Email specific validation
+            if (field.type === 'email' && value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    isValid = false;
+                }
+            }
+
+            // Show error if invalid
+            if (!isValid) {
+                field.classList.add('error');
+                if (errorElement) errorElement.classList.add('show');
+            }
+
+            return isValid;
+        }
+
+        // Validate all fields
+        function validateForm() {
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        }
+
+        // Real-time validation
+        const inputs = form.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => validateField(input));
+            input.addEventListener('input', () => {
+                if (input.classList.contains('error')) {
+                    validateField(input);
+                }
+            });
+        });
+
+        // Show message
+        function showMessage(message, type) {
+            messageText.textContent = message;
+            formMessage.className = 'form-message ' + type + ' show';
+
+            // Auto-hide after 8 seconds
+            setTimeout(() => {
+                formMessage.classList.remove('show');
+            }, 8000);
+        }
+
+        // Form submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            console.log('📤 Form submit triggered');
+
+            if (!validateForm()) {
+                console.log('❌ Form validation failed');
+                showMessage('Please fix the errors above and try again.', 'error');
+                return;
+            }
+
+            // Show loading state
+            console.log('⏳ Showing loading state');
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+
+            try {
+                // Prepare data
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+
+                console.log('📋 Form data prepared:', data);
+                console.log('🌐 Sending to:', API_URL);
+
+                // Send request
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify(data)
+                });
+
+                console.log('📡 Response received:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    ok: response.ok
+                });
+
+                const result = await response.json();
+                console.log('📄 Response data:', result);
+
+                if (response.ok) {
+                    console.log('✅ Form submitted successfully');
+                    showMessage('Thank you! We\'ll get back to you within 24 hours.', 'success');
+                    form.reset();
+
+                    // Redirect to thank you page after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'thank-you.html';
+                    }, 2000);
+                } else {
+                    throw new Error(result.message || result.error || 'Something went wrong');
+                }
+
+            } catch (error) {
+                console.error('❌ Form submission error:', error);
+
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    showMessage('Cannot connect to server. Please make sure the backend is running on http://localhost:5000', 'error');
+                } else {
+                    showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+                }
+            } finally {
+                // Hide loading state
+                console.log('🔄 Hiding loading state');
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        });
+
+        console.log('✅ Form event listeners attached');
+    }
+</script>
+
+</body>
+</html>

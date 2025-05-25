@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - marron.dev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        :root {
+            --primary: #7B4A2A;
+            --primary-light: #9B6C4E;
+            --primary-dark: #5C3114;
+            --accent: #FF6B35;
+            --accent-light: #FF8A5B;
+            --accent-glow: rgba(255, 107, 53, 0.1);
+            --white: #FFFFFF;
+            --off-white: #FAFAFA;
+            --light-gray: #F8F8F8;
+            --medium-gray: #E8E8E8;
+            --text-dark: #1A1A1A;
+            --text-medium: #4A4A4A;
+            --text-light: #7A7A7A;
+            --border-light: rgba(0, 0, 0, 0.06);
+            --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.04);
+            --shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.08);
+            --shadow-large: 0 20px 80px rgba(0, 0, 0, 0.12);
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            height: 100vh;
+        }
+
+        /* Animated background más sutil */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 30% 40%, var(--accent-glow) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(123, 74, 42, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, var(--accent-glow) 0%, transparent 30%);
+            animation: gentleFloat 20s ease-in-out infinite alternate;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes gentleFloat {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { transform: translate(-20px, -10px) rotate(1deg) scale(1.02); }
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--text-dark);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgba(26, 26, 26, 0.15);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            mix-blend-mode: normal;
+        }
+
+        .cursor-follower.hover {
+            width: 40px;
+            height: 40px;
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        /* Main Container */
+        .thank-you-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .thank-you-content {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Success Icon */
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 3rem;
+            font-size: 3rem;
+            color: var(--white);
+            opacity: 0;
+            transform: scale(0.5);
+            animation: iconPop 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards 0.3s;
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
+        }
+
+        @keyframes iconPop {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Main Title */
+        .thank-you-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 300;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards 0.6s;
+        }
+
+        .thank-you-title .accent {
+            color: var(--accent);
+        }
+
+        /* Subtitle */
+        .thank-you-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-medium);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards 0.8s;
+        }
+
+        /* Message Box */
+        .message-box {
+            background: var(--off-white);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            border-left: 4px solid var(--accent);
+            box-shadow: var(--shadow-soft);
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards 1s;
+        }
+
+        .message-text {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .next-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-glow);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards 1.2s;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+            background: var(--accent-light);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--text-dark);
+            border: 2px solid var(--border-light);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Social Links */
+        .social-follow {
+            margin-top: 4rem;
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards 1.4s;
+        }
+
+        .social-title {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--off-white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-medium);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        /* Auto redirect countdown */
+        .redirect-info {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards 1.6s;
+        }
+
+        .countdown {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .thank-you-container {
+                padding: 1rem;
+            }
+
+            .success-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .message-box {
+                padding: 2rem;
+            }
+
+            .next-steps {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<!-- Floating Elements -->
+<div class="floating-element">
+    <i class="fas fa-rocket" style="font-size: 2rem; color: var(--accent);"></i>
+</div>
+<div class="floating-element">
+    <i class="fas fa-heart" style="font-size: 1.5rem; color: var(--primary);"></i>
+</div>
+<div class="floating-element">
+    <i class="fas fa-star" style="font-size: 1.8rem; color: var(--accent-light);"></i>
+</div>
+
+<!-- Main Content -->
+<div class="thank-you-container">
+    <div class="thank-you-content">
+
+        <!-- Success Icon -->
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="thank-you-title">
+            <span class="accent">Thank</span> You!
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="thank-you-subtitle">Your message has been sent successfully</p>
+
+        <!-- Message Box -->
+        <div class="message-box">
+            <p class="message-text">
+                We've received your project inquiry and we're excited to learn more! Our team will review your details and get back to you within <strong>24 hours</strong> with next steps.
+            </p>
+
+            <div class="next-steps">
+                <div class="step-item">
+                    <div class="step-icon">
+                        <i class="fas fa-envelope-open"></i>
+                    </div>
+                    <div class="step-text">Check your email for confirmation</div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="step-text">We'll schedule a discovery call</div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="step-text">We'll prepare initial ideas</div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="step-text">Together we'll plan your project</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-home"></i>
+                <span>Back to Home</span>
+            </a>
+
+            <a href="index.html#portfolio" class="btn btn-secondary">
+                <i class="fas fa-folder-open"></i>
+                <span>View Our Work</span>
+            </a>
+        </div>
+
+        <!-- Social Follow -->
+        <div class="social-follow">
+            <p class="social-title">Follow our journey</p>
+            <div class="social-links">
+                <a href="#" class="social-link" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-link" title="Dribbble">
+                    <i class="fab fa-dribbble"></i>
+                </a>
+                <a href="#" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Auto Redirect Info -->
+        <div class="redirect-info">
+            <i class="fas fa-info-circle"></i>
+            You'll be redirected to our homepage in <span class="countdown" id="countdown">10</span> seconds
+            <br><small>or click any button above to navigate immediately</small>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.innerWidth > 768) {
+            initCursor();
+        }
+        initCountdown();
+        addClickEffects();
+    });
+
+    // Custom cursor
+    function initCursor() {
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        function animateFollower() {
+            followerX += (mouseX - followerX) * 0.1;
+            followerY += (mouseY - followerY) * 0.1;
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        const interactiveElements = document.querySelectorAll('a, .step-item, .social-link');
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorFollower.classList.add('hover');
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorFollower.classList.remove('hover');
+            });
+        });
+    }
+
+    // Countdown and auto-redirect
+    function initCountdown() {
+        let seconds = 10;
+        const countdownElement = document.getElementById('countdown');
+
+        const timer = setInterval(() => {
+            seconds--;
+            countdownElement.textContent = seconds;
+
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+
+        // Cancel auto-redirect if user interacts
+        document.addEventListener('click', () => {
+            clearInterval(timer);
+            countdownElement.textContent = '∞';
+            countdownElement.parentElement.innerHTML = '<i class="fas fa-info-circle"></i> Auto-redirect cancelled - navigate using the buttons above';
+        });
+    }
+
+    // Click effects
+    function addClickEffects() {
+        document.querySelectorAll('.btn, .step-item, .social-link').forEach(element => {
+            element.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 107, 53, 0.3);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                    z-index: 10;
+                `;
+
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.height, rect.width);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+
+                this.style.position = 'relative';
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+    }
+
+    // Add ripple animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Confetti effect (optional)
+    function createConfetti() {
+        const colors = ['#FF6B35', '#7B4A2A', '#FF8A5B'];
+        const confettiCount = 50;
+
+        for (let i = 0; i < confettiCount; i++) {
+            const confetti = document.createElement('div');
+            confetti.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+                top: -10px;
+                left: ${Math.random() * 100}vw;
+                animation: confetti-fall ${Math.random() * 3 + 2}s linear forwards;
+                z-index: 1000;
+                border-radius: 50%;
+            `;
+
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+    }
+
+    // Add confetti animation
+    const confettiStyle = document.createElement('style');
+    confettiStyle.textContent = `
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(confettiStyle);
+
+    // Trigger confetti after page loads
+    setTimeout(createConfetti, 1000);
+</script>
+
+</body>
+</html>
